@@ -19,14 +19,9 @@ public class StudentProfileService : IStudentProfileService
 
     public async Task CreateProfileForStudent(StudentProfileRequestDto studentProfile)
     {
-        StudentProfile stProf = new StudentProfile();
-        stProf.FirstName = studentProfile.FirstName;
-        stProf.LastName = studentProfile.LastName;
-        stProf.DateOfBirth = studentProfile.DateOfBirth;
-        stProf.Description = studentProfile.Description;
-        stProf.Age = studentProfile.Age;
+        var res = _mapper.Map<StudentProfile>(studentProfile);
 
-        await _studentProfileRepository.AddRecordForStudentProfile(stProf);
+        await _studentProfileRepository.AddRecordForStudentProfile(res);
     }
 
     public async Task<StudentProfile> EditProfileForStudent(StudentProfileEditRequestDto studentProfileDto)
