@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Repository.AdditionalHelper;
 using Repository.Data;
 using Repository.Interfaces;
-using Repository.Models.DataTransferObject;
 using Repository.Models.Domain;
 
 namespace Repository.Repositories;
@@ -34,7 +34,7 @@ public class StudentProfileRepository : IStudentProfileRepository
 
         if (studentProfile == null)
         {
-            throw new Exception("Entity by this id was not found.");
+            throw new Exception(Constants.NotFoundEntity);
         }
 
         return studentProfile;

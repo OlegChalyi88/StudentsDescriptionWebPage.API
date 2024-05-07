@@ -4,6 +4,7 @@ using Repository.Interfaces;
 using Repository.Repositories;
 using Service.Interfaces;
 using Service.Repositories;
+using StudentsDescriptionWebPage.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +46,7 @@ app.UseCors(options =>
 
 app.UseAuthorization();
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 app.Run();
