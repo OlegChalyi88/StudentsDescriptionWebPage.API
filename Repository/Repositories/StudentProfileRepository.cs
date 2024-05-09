@@ -34,7 +34,7 @@ public class StudentProfileRepository : IStudentProfileRepository
 
         if (studentProfile == null)
         {
-            throw new Exception(Constants.NotFoundEntity);
+            throw new Exception(string.Format(Constants.NotFoundEntity, id));
         }
 
         return studentProfile;
