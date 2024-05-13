@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Repository.Models.DataTransferObject.Course;
+using Repository.Models.Domain;
 
-namespace Repository.Interfaces
+namespace Repository.Interfaces;
+
+public interface ICourseRepository
 {
-    internal interface ICourseRepository
-    {
-    }
+    Task AddCourse(Course course);
 }

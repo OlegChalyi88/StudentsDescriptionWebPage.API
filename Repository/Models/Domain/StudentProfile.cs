@@ -1,11 +1,16 @@
-﻿namespace Repository.Models.Domain
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace Repository.Models.Domain
 {
+    //[Index(nameof(StudentLogin), IsUnique = true)]
     public class StudentProfile
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public string StudentLogin { get; set; } = string.Empty;
+        //[StringLength(255), Required]
+        public string StudentLogin { get; set; }
         public string StudentCardNumber { get; set; } = string.Empty;
         public string? Description { get; set; }
         public int? Age { get; set; }
