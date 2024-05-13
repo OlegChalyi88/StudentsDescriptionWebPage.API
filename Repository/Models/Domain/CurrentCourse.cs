@@ -1,5 +1,8 @@
-﻿namespace Repository.Models.Domain;
+﻿using System.Text.Json.Serialization;
 
+namespace Repository.Models.Domain;
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CurrentCourse
 {
     CsharpStarter = 1,

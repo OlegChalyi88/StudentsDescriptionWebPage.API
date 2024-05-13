@@ -25,6 +25,10 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IStudentProfileService, StudentProfileService>();
 builder.Services.AddTransient<IStudentProfileRepository, StudentProfileRepository>();
+builder.Services.Decorate<IStudentProfileRepository, StudentProfileRepositoryDecorator>();
+
+builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddTransient<ICourseRepository, CourseRepository>();
 
 var app = builder.Build();
 
