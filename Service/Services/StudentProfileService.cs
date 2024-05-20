@@ -17,11 +17,12 @@ public class StudentProfileService : IStudentProfileService
         _studentProfileRepository = studentProfileRepository;
     }
 
-    public async Task CreateProfileForStudent(StudentProfileRequestDto studentProfile)
+    public async Task CreateProfileForStudent(StudentProfileRequestDto studentProfileDto)
     {
-        var res = _mapper.Map<StudentProfile>(studentProfile);
+        var studentProfile = _mapper.Map<StudentProfile>(studentProfileDto);
+        studentProfile.StudentCardNumber = Guid.NewGuid().ToString();
 
-        await _studentProfileRepository.AddRecordForStudentProfile(res);
+        await _studentProfileRepository.AddRecordForStudentProfile(studentProfile);
     }
 
     public async Task<StudentProfile> EditProfileForStudent(StudentProfileEditRequestDto studentProfileDto)
