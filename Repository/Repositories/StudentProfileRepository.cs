@@ -26,7 +26,10 @@ public class StudentProfileRepository : IStudentProfileRepository
 
     public async Task<IEnumerable<StudentProfile>> RetrieveStudentProfiles()
     {
-        var result = await _appDbContext.StudentProfiles.ToListAsync();
+        var result = await _appDbContext.StudentProfiles
+                            .Include(stProf => stProf.AdditionalInfo)
+                            .ThenInclude(addInfo => addInfo.Course)
+                            .ToListAsync();
 
         return result;
     }
