@@ -5,7 +5,6 @@ public record StudentProfileEditRequestDto(
     string FirstName,
     string LastName,
     string StudentLogin,
-    string StudentCardNumber,
     string? Description,
     int? Age,
     bool IsGraduated,

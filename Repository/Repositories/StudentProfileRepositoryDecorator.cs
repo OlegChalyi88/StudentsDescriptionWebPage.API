@@ -19,8 +19,14 @@ public class StudentProfileRepositoryDecorator : IStudentProfileRepository
 
     public async Task AddRecordForStudentProfile(StudentProfile stProf)
     {
-        await _appDbContext.StudentProfiles.AddAsync(stProf);
-        await _appDbContext.SaveChangesAsync();
+        var res = await _appDbContext.StudentProfiles.Where(x => x.StudentCardNumber == stProf.StudentCardNumber).FirstOrDefaultAsync();
+
+        if (res != null)
+        {
+            throw new Exception(string.Format(Constants.CardAlreadyExist, stProf.StudentCardNumber));
+        }
+
+        await _studentProfileRepository.AddRecordForStudentProfile(stProf);
     }
 
     public async Task<IEnumerable<StudentProfile>> RetrieveStudentProfiles()
