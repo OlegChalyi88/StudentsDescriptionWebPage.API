@@ -16,11 +16,12 @@ public class StudentProfileService : IStudentProfileService
         _mapper = mapper;
         _studentProfileRepository = studentProfileRepository;
     }
-
+    //todo for Veronika: під час створення профілю студента необхідно присвоїти йому номер картки, засетити йому 
+    // false для властивості isGraduted. І зробити аби між полями віку і дати народження не було розбіжностей.
     public async Task CreateProfileForStudent(StudentProfileRequestDto studentProfileDto)
     {
         var studentProfile = _mapper.Map<StudentProfile>(studentProfileDto);
-        studentProfile.StudentCardNumber = Guid.NewGuid().ToString();
+        studentProfile.StudentCardNumber = Guid.NewGuid().ToString();//rewrite to 6 digits
 
         await _studentProfileRepository.AddRecordForStudentProfile(studentProfile);
     }
