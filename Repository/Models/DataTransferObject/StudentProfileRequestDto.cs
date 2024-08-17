@@ -8,6 +8,4 @@ public record StudentProfileRequestDto(
     string LastName,
     string StudentLogin,
     string? Description,
-    int? Age,
-    bool IsGraduated,
     DateTime? DateOfBirth);
