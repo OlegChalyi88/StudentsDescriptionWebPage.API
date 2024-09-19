@@ -9,7 +9,7 @@ namespace StudentsDescriptionWebPage.API.Controllers;
 public class CourseController : ControllerBase
 {
     private readonly ICourseService _courseService;
-    
+
     public CourseController(ICourseService courseService)
     {
         _courseService = courseService;
@@ -19,6 +19,22 @@ public class CourseController : ControllerBase
     //Dto models based on the domain Course model.
 
     //todo Igor: implement GetCourseById()
+
+    [HttpGet("getcourse/{id:guid}")]
+    public async Task<IActionResult> GetCourseById(Guid id)
+    {
+        if (id != Guid.Empty)
+        {
+            var result = await _courseService.GetCourseById(id);
+            return Ok(result);
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
+
     [HttpGet("courses")]
     public async Task<IActionResult> GetAllCourses()
     {
