@@ -4,5 +4,6 @@ namespace Service.Interfaces;
 
 public interface ICourseService
 {
+    Task<List<CourseDto>> GetAllCourses();
     Task CreateCourse(CourseDto courseDto);
 }
