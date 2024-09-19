@@ -1,4 +1,5 @@
-﻿using Repository.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Data;
 using Repository.Interfaces;
 using Repository.Models.DataTransferObject.Course;
 using Repository.Models.Domain;
@@ -13,6 +14,14 @@ public class CourseRepository : ICourseRepository
     {
         _appDbContext = appDbContext;
     }
+
+    public async Task<List<Course>> RetrieveAllCourses()
+    {
+        List<Course> courses = await _appDbContext.Courses.ToListAsync();
+
+        return courses;
+    }
+
     public async Task AddCourse(Course course)
     {
         await _appDbContext.Courses.AddAsync(course);

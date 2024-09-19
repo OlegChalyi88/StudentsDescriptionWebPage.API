@@ -5,7 +5,7 @@ namespace Repository.Models.DataTransferObject.Course;
 public record CourseDto(
             string GroupName,
             string TitleOfCourse,
-            string TeacherName,
+            string Trener,
             DateTime StartDateOfCourse,
             CurrentCourse CurrentCourse
             );

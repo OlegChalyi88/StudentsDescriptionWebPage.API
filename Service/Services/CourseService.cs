@@ -3,6 +3,7 @@ using Repository.Interfaces;
 using Repository.Models.DataTransferObject.Course;
 using Repository.Models.Domain;
 using Service.Interfaces;
+using System.Collections.Generic;
 
 namespace Service.Repositories;
 
@@ -15,6 +16,14 @@ public class CourseService : ICourseService
     {
         _mapper = mapper;
         _courseRepository = courseRepository;
+    }
+
+    public async Task<List<CourseDto>> GetAllCourses()
+    {
+        List<Course> courses = await _courseRepository.RetrieveAllCourses();
+        List<CourseDto> coursesDto = _mapper.Map<List<CourseDto>>(courses);
+
+        return coursesDto;
     }
 
     public async Task CreateCourse(CourseDto courseDto)

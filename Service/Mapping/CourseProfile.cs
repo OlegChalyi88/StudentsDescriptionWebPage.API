@@ -9,6 +9,8 @@ public class CourseProfile : Profile
     public CourseProfile()
     {
         CreateMap<CourseDto, Course>()
-            .ForMember(dest => dest.CurrentCourse, opt => opt.MapFrom(src => src.CurrentCourse.ToString()));
+            .ForMember(dest => dest.CurrentCourse, opt => opt.MapFrom(src => src.CurrentCourse.ToString()))
+            .ForMember(dest => dest.TeacherName, opt => opt.MapFrom(src => "Oleh"))
+            .ReverseMap();
     }
 }
