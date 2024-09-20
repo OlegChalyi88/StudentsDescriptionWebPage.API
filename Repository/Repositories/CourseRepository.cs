@@ -38,4 +38,17 @@ public class CourseRepository : ICourseRepository
         }
         return retrievedCourse;
     }
+
+    public async Task RemoveCourseById(Guid courseId)
+    {
+        var retrievedCourse = await _appDbContext.Courses.Where(c => c.Id.Equals(courseId)).FirstOrDefaultAsync();
+
+        if (retrievedCourse == null)
+        {
+            throw new Exception(string.Format(Constants.NotFoundEntity, courseId));
+        }
+
+        _appDbContext.Courses.Remove(retrievedCourse);
+        _appDbContext.SaveChanges();
+    }
 }

@@ -42,4 +42,16 @@ public class CourseService : ICourseService
         var courseDto = _mapper.Map<CourseDto>(foundCourse);
         return courseDto;
     }
+
+    public async Task<CurrentCourse?> DeleteCourseById(Guid courseId)
+    {
+        var foundCourse = await _courseRepository.RetrieveCourseById(courseId);
+        if (foundCourse == null)
+        {
+            return null;
+        }
+
+        await _courseRepository.RemoveCourseById(courseId);
+        return foundCourse.CurrentCourse;
+    }
 }

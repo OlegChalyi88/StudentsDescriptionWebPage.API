@@ -14,11 +14,6 @@ public class CourseController : ControllerBase
     {
         _courseService = courseService;
     }
-    //todo for Igor: Create HttpGet method in the controller and methods in 
-    //CourseService and CourseRepository. Besides it create dto models for every method listed above
-    //Dto models based on the domain Course model.
-
-    //todo Igor: implement GetCourseById()
 
     [HttpGet("getcourse/{id:guid}")]
     public async Task<IActionResult> GetCourseById(Guid id)
@@ -58,4 +53,19 @@ public class CourseController : ControllerBase
     //todo for Igor: Create HttpDelete method in the controller and methods in 
     //CourseService and CourseRepository. Besides it create dto models for every method listed above
     //Dto models based on the domain Course model.
+
+
+    [HttpDelete("removecourse/{id:guid}")]
+    public async Task<IActionResult> RemoveCourse(Guid id)
+    {
+        if (id != Guid.Empty)
+        {
+            var result = await _courseService.DeleteCourseById(id);
+            return Ok($"course {result} with id: {id} was removed");
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
 }
