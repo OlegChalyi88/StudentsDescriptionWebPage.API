@@ -52,9 +52,9 @@ public class ExceptionMiddleware
     {
         return exception.Message switch
         {
-            Constants.CardAlreadyExist => HttpStatusCode.Conflict,
-            Constants.NotFoundEntity => HttpStatusCode.NotFound,
-            Constants.ObjectIsUsedByEntity => HttpStatusCode.Conflict,
+            Constants.CardAlreadyExist => HttpStatusCode.Conflict,// this always return default value as it can't resolve '{0}' in constant automatically
+            Constants.NotFoundEntity => HttpStatusCode.NotFound, //same issue
+            Constants.ObjectIsUsedByEntity => HttpStatusCode.Conflict, 
             _ => HttpStatusCode.InternalServerError
         };
     }
