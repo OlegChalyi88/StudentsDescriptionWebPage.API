@@ -54,4 +54,13 @@ public class CourseService : ICourseService
         await _courseRepository.RemoveCourseById(courseId);
         return foundCourse.CurrentCourse;
     }
+
+    public async Task<CourseDto> EditCourse(CourseDto courseDto)
+    {
+        var mappedCourse = _mapper.Map<Course>(courseDto);
+        var updatedCourse = await _courseRepository.UpdateCourse(mappedCourse);
+
+        var updatedCourseDto = _mapper.Map<CourseDto>(updatedCourse);
+        return updatedCourseDto;
+    }
 }

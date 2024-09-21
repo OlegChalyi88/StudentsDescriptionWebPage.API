@@ -8,4 +8,5 @@ public interface ICourseRepository
     Task AddCourse(Course course);
     Task<Course> RetrieveCourseById(Guid courseId);
     Task RemoveCourseById(Guid courseId);
+    Task<Course> UpdateCourse(Course course);
 }

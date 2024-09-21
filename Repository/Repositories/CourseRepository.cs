@@ -51,4 +51,18 @@ public class CourseRepository : ICourseRepository
         _appDbContext.Courses.Remove(retrievedCourse);
         _appDbContext.SaveChanges();
     }
+
+    public async Task<Course> UpdateCourse(Course course)
+    {
+        var existingCourse = await _appDbContext.Courses.FindAsync(course.Id);
+        if (existingCourse == null)
+        {
+            throw new Exception(string.Format(Constants.NotFoundEntity, course.Id));
+        }
+
+        _appDbContext.Entry(existingCourse).CurrentValues.SetValues(course);
+
+        await _appDbContext.SaveChangesAsync();
+        return existingCourse;
+    }
 }

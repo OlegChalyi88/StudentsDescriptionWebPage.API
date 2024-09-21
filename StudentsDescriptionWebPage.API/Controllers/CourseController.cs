@@ -46,14 +46,19 @@ public class CourseController : ControllerBase
         return Ok();
     }
 
-    //todo for Igor: Create HttpPut method in the controller and methods in 
-    //CourseService and CourseRepository. Besides it create dto models for every method listed above
-    //Dto models based on the domain Course model.
-
-    //todo for Igor: Create HttpDelete method in the controller and methods in 
-    //CourseService and CourseRepository. Besides it create dto models for every method listed above
-    //Dto models based on the domain Course model.
-
+    [HttpPut("editcourse")]
+    public async Task<IActionResult> EditCourse(CourseDto courseDto)
+    {
+        if(courseDto != null)
+        {
+            var updatedCourse = await _courseService.EditCourse(courseDto);
+            return Ok(updatedCourse);
+        }
+        else
+        {
+            return NoContent();
+        }
+    }
 
     [HttpDelete("removecourse/{id:guid}")]
     public async Task<IActionResult> RemoveCourse(Guid id)

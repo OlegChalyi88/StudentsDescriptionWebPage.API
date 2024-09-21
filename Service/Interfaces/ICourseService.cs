@@ -9,4 +9,5 @@ public interface ICourseService
     Task CreateCourse(CourseDto courseDto);
     Task<CourseDto> GetCourseById(Guid courseId);
     Task<CurrentCourse?> DeleteCourseById(Guid courseId);
+    Task<CourseDto> EditCourse(CourseDto courseDto);
 }

@@ -14,6 +14,6 @@ public class CourseProfile : Profile
             .ReverseMap();
 
         CreateMap<Course, CourseDto>()
-            .ConstructUsing(src => new CourseDto(src.GroupName, src.TitleOfCourse, src.TeacherName, src.StartDateOfCourse, src.CurrentCourse));
+            .ConstructUsing(src => new CourseDto(src.Id ,src.GroupName, src.TitleOfCourse, src.TeacherName, src.StartDateOfCourse, src.CurrentCourse));
     }
 }
