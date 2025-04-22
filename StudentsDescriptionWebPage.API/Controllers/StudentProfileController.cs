@@ -16,7 +16,7 @@ public class StudentProfileController : ControllerBase
     }
 
     [HttpPost("profile")]
-    public async Task<IActionResult> CreateProfile([FromQuery]StudentProfileRequestDto studentProfile)
+    public async Task<IActionResult> CreateProfile([FromBody]StudentProfileRequestDto studentProfile)
     {
         await _studentProfileService.CreateProfileForStudent(studentProfile);
 
