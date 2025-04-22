@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Repository.AdditionalHelper;
 using Repository.Data;
 using Repository.Interfaces;
-using Repository.Models.DataTransferObject.Course;
 using Repository.Models.Domain;
 
 namespace Repository.Repositories;
@@ -25,6 +25,44 @@ public class CourseRepository : ICourseRepository
     public async Task AddCourse(Course course)
     {
         await _appDbContext.Courses.AddAsync(course);
-        await _appDbContext.SaveChangesAsync(); ;
+        await _appDbContext.SaveChangesAsync();
+    }
+
+    public async Task<Course> RetrieveCourseById(Guid courseId)
+    {
+        var retrievedCourse = await _appDbContext.Courses.Where(c => c.Id.Equals(courseId)).FirstOrDefaultAsync();
+
+        if (retrievedCourse == null)
+        {
+            throw new Exception(string.Format(Constants.NotFoundEntity, courseId));
+        }
+        return retrievedCourse;
+    }
+
+    public async Task RemoveCourseById(Guid courseId)
+    {
+        var retrievedCourse = await _appDbContext.Courses.Where(c => c.Id.Equals(courseId)).FirstOrDefaultAsync();
+
+        if (retrievedCourse == null)
+        {
+            throw new Exception(string.Format(Constants.NotFoundEntity, courseId));
+        }
+
+        _appDbContext.Courses.Remove(retrievedCourse);
+        _appDbContext.SaveChanges();
+    }
+
+    public async Task<Course> UpdateCourse(Course course)
+    {
+        var existingCourse = await _appDbContext.Courses.FindAsync(course.Id);
+        if (existingCourse == null)
+        {
+            throw new Exception(string.Format(Constants.NotFoundEntity, course.Id));
+        }
+
+        _appDbContext.Entry(existingCourse).CurrentValues.SetValues(course);
+
+        await _appDbContext.SaveChangesAsync();
+        return existingCourse;
     }
 }

@@ -32,6 +32,13 @@ builder.Services.AddTransient<ICourseRepository, CourseRepository>();
 
 var app = builder.Build();
 
+//if you don't want to have it in programm I'll use it as stashed code in git for myself
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

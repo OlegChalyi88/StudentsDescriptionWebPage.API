@@ -12,5 +12,8 @@ public class CourseProfile : Profile
             .ForMember(dest => dest.CurrentCourse, opt => opt.MapFrom(src => src.CurrentCourse.ToString()))
             .ForMember(dest => dest.TeacherName, opt => opt.MapFrom(src => "Oleh"))
             .ReverseMap();
+
+        CreateMap<Course, CourseDto>()
+            .ConstructUsing(src => new CourseDto(src.Id ,src.GroupName, src.TitleOfCourse, src.TeacherName, src.StartDateOfCourse, src.CurrentCourse));
     }
 }
